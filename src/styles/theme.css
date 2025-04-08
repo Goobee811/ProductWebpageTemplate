@@ -1,0 +1,349 @@
+/* Theme CSS based on Syngenta Professional Pest Management Brand Guidelines */
+
+:root {
+  /* Primary Colors */
+  --syngenta-cyan: #00AEEF;
+  --syngenta-green: #8DC63F;
+  
+  /* Secondary Colors */
+  --syngenta-cool-gray: #6D6E71;
+  --syngenta-blue: #0072CE;
+  --syngenta-aqua: #00A79D;
+  
+  /* Text Colors */
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  
+  /* Font Family */
+  --font-primary: Gotham, Arial, sans-serif; /* Primary typeface as per guidelines */
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --border-radius: 4px;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--syngenta-cyan);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 3px solid var(--syngenta-green);
+  padding-bottom: var(--spacing-xs);
+  display: inline-block;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--syngenta-cool-gray);
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+a {
+  color: var(--syngenta-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Line of Optimism - visual element from brand guidelines */
+.line-of-optimism {
+  position: relative;
+  padding: var(--spacing-md);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-xl);
+}
+
+.line-of-optimism::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(135deg, transparent 0%, var(--syngenta-cyan) 100%);
+  opacity: 0.15;
+  z-index: -1;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  border-bottom: 3px solid var(--syngenta-cyan);
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+}
+
+.tab-button {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: none;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+}
+
+.tab-button:hover {
+  color: var(--syngenta-cyan);
+}
+
+.tab-button.active {
+  border-bottom: 3px solid var(--syngenta-green);
+  color: var(--syngenta-cyan);
+  font-weight: 700;
+}
+
+/* Content Sections */
+.tab-content {
+  padding: var(--spacing-xl) 0;
+}
+
+section {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: #f9f9f9;
+  border-radius: var(--border-radius);
+}
+
+section:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Tables */
+.feature-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-lg) 0;
+}
+
+.feature-table th {
+  background-color: var(--syngenta-cyan);
+  color: white;
+  padding: var(--spacing-md);
+  text-align: left;
+}
+
+.feature-table th:first-child {
+  border-top-left-radius: var(--border-radius);
+}
+
+.feature-table th:last-child {
+  border-top-right-radius: var(--border-radius);
+}
+
+.feature-table td {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid #eeeeee;
+}
+
+.feature-table tr:last-child td {
+  border-bottom: none;
+}
+
+.feature-table tr:nth-child(even) {
+  background-color: rgba(0, 174, 239, 0.05);
+}
+
+/* Chevron bullets as per brand guidelines */
+.chevron-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.chevron-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.chevron-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  border-color: var(--syngenta-cyan);
+  transform: rotate(-45deg);
+}
+
+/* Steps list (numbered) */
+.steps-list {
+  counter-reset: step;
+  list-style: none;
+  padding-left: 0;
+}
+
+.steps-list li {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: var(--spacing-md);
+  counter-increment: step;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--syngenta-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Quotes */
+blockquote {
+  background-color: rgba(0, 174, 239, 0.05);
+  border-left: 4px solid var(--syngenta-cyan);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+  font-style: italic;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* FAQ Section */
+.faq-item {
+  margin-bottom: var(--spacing-md);
+  border: 1px solid #eee;
+  border-radius: var(--border-radius);
+}
+
+.faq-question {
+  padding: var(--spacing-md);
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.faq-answer {
+  padding: var(--spacing-md);
+  background-color: rgba(0, 174, 239, 0.05);
+  border-top: 1px solid #eee;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--syngenta-cyan);
+}
+
+/* Document list */
+.document-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border: 1px solid #eee;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  background-color: white;
+}
+
+.document-icon {
+  font-size: 2rem;
+  margin-right: var(--spacing-md);
+}
+
+.document-info {
+  flex: 1;
+}
+
+.document-info h4 {
+  margin: 0 0 var(--spacing-xs) 0;
+}
+
+.document-meta {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.download-button {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--syngenta-cyan);
+  color: white;
+  border-radius: var(--border-radius);
+  font-weight: bold;
+}
+
+.download-button:hover {
+  background-color: var(--syngenta-blue);
+  text-decoration: none;
+}
+
+/* Placeholders for prototype */
+.placeholder {
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Tagline - as per brand guidelines */
+.tagline {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--syngenta-cyan);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  font-size: 1.2rem;
+}
+
+.tagline::after {
+  content: "FOR LIFE UNINTERRUPTED™";
+}
