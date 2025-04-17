@@ -2,14 +2,14 @@ import React from 'react';
 import dataModules, { getProductById, ProductDataType } from '../data';
 import { FAQ, FeatureDetail } from '../types/product';
 
-// Example 1: Access via named imports
+// Ví dụ 1: Truy cập trực tiếp từ import
 const ProductExampleComponent1: React.FC = () => {
-  // Get Icon 10CS data directly
+  // Lấy dữ liệu Icon 10CS trực tiếp
   const icon10CS = dataModules.icon10CSData;
   
   return (
     <div className="product-example">
-      <h2>Ví dụ 1: Truy cập trực tiếp</h2>
+      <h2>Ví dụ 1: Truy cập dữ liệu trực tiếp</h2>
       <h3>{icon10CS.productInfo.name}</h3>
       <p>{icon10CS.productInfo.tagline}</p>
       
@@ -23,9 +23,9 @@ const ProductExampleComponent1: React.FC = () => {
   );
 };
 
-// Example 2: Access via product ID
+// Ví dụ 2: Truy cập thông qua ID sản phẩm
 const ProductExampleComponent2: React.FC = () => {
-  // Use the helper function to get product by ID
+  // Sử dụng hàm helper để lấy sản phẩm theo ID
   const icon10CS = getProductById('icon-10cs-62-5ml');
   
   if (!icon10CS) {
@@ -34,7 +34,7 @@ const ProductExampleComponent2: React.FC = () => {
   
   return (
     <div className="product-example">
-      <h2>Ví dụ 2: Truy cập qua ID</h2>
+      <h2>Ví dụ 2: Truy cập qua ID sản phẩm</h2>
       <h3>{icon10CS.productInfo.name}</h3>
       <p>{icon10CS.productInfo.description}</p>
       
@@ -49,7 +49,7 @@ const ProductExampleComponent2: React.FC = () => {
   );
 };
 
-// Example 3: Dynamic product switching
+// Ví dụ 3: Chuyển đổi sản phẩm động
 const ProductSwitcher: React.FC = () => {
   const [currentProductId, setCurrentProductId] = React.useState('icon-10cs-62-5ml');
   const currentProduct = getProductById(currentProductId);
@@ -82,7 +82,7 @@ const ProductSwitcher: React.FC = () => {
 
 export { ProductExampleComponent1, ProductExampleComponent2, ProductSwitcher };
 
-// Default export with all components
+// Export mặc định với tất cả các components
 const ProductExample: React.FC = () => {
   return (
     <div className="product-examples-container">

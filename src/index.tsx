@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// Toggle between true/false to switch between ProductExample and App
+// Chuyển đổi giữa true/false để xem ví dụ hoặc trang sản phẩm đầy đủ
 const showExampleComponent = true;
 
 root.render(
