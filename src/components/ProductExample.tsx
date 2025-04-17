@@ -1,5 +1,6 @@
 import React from 'react';
-import dataModules, { getProductById } from '../data';
+import dataModules, { getProductById, ProductDataType } from '../data';
+import { FAQ, FeatureDetail } from '../types/product';
 
 // Example 1: Access via named imports
 const ProductExampleComponent1: React.FC = () => {
@@ -14,7 +15,7 @@ const ProductExampleComponent1: React.FC = () => {
       
       <h4>Đặc tính sản phẩm:</h4>
       <ul>
-        {icon10CS.features.map(feature => (
+        {icon10CS.features.map((feature: FeatureDetail) => (
           <li key={feature.id}>{feature.title}</li>
         ))}
       </ul>
@@ -38,7 +39,7 @@ const ProductExampleComponent2: React.FC = () => {
       <p>{icon10CS.productInfo.description}</p>
       
       <h4>Câu hỏi thường gặp:</h4>
-      {icon10CS.faqs.slice(0, 2).map(faq => (
+      {icon10CS.faqs.slice(0, 2).map((faq: FAQ) => (
         <div key={faq.id}>
           <h5>{faq.question}</h5>
           <p>{faq.answer}</p>
