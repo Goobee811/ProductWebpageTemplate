@@ -1,39 +1,37 @@
 // src/data/index.ts
 
-// Import named exports from productData
-import productData from './productData';
-
-// Import named exports from productTemplateData
+// Import all the product data files
 import productTemplateData from './productTemplateData';
-
-// Import named exports from icon10CSData
-import {
-  productInfo as icon10CSProductInfo,
-  productFeatures as icon10CSFeatures,
-  productUserGroups as icon10CSUserGroups,
-  productUsageProcesses as icon10CSUsageProcesses,
-  productEnvironments as icon10CSEnvironments,
-  productFAQs as icon10CSFAQs,
-  productResearchProofs as icon10CSResearchProofs,
-  productDocuments as icon10CSDocuments
-} from './icon10CSData';
 import icon10CSData from './icon10CSData';
 
-// Re-export the specific imports with unique names
-export {
-  icon10CSProductInfo,
-  icon10CSFeatures,
-  icon10CSUserGroups,
-  icon10CSUsageProcesses,
-  icon10CSEnvironments,
-  icon10CSFAQs,
-  icon10CSResearchProofs,
-  icon10CSDocuments
+// Import these individually if you need direct access to them
+export { default as productTemplateData } from './productTemplateData';
+export { default as icon10CSData } from './icon10CSData';
+
+// Create a registry of all product data that can be accessed by product ID
+const productRegistry = {
+  'template': productTemplateData,
+  'icon-10cs-62-5ml': icon10CSData,
 };
 
-// Export all the default imports
+// Helper function to get product data by ID
+export const getProductById = (productId: string) => {
+  return productRegistry[productId] || null;
+};
+
+// Export the active products - makes it easy to map through all products
+export const activeProducts = [
+  icon10CSData,
+];
+
+// Export the registry for direct access if needed
+export { productRegistry };
+
+// Export a default object with all data and helpers
 export default {
-  productData,
   productTemplateData,
-  icon10CSData
+  icon10CSData,
+  getProductById,
+  activeProducts,
+  productRegistry
 };
