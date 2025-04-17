@@ -1,6 +1,14 @@
 // src/data/index.ts
 import { ProductInfo, FeatureDetail, UserGroup, UsageProcess, UsageEnvironment, FAQ, ResearchProof, ProductDocument } from '../types/product';
 
+// Import all the product data files
+import productTemplateData from './productTemplateData';
+import icon10CSData from './icon10CSData';
+
+// Import these individually if you need direct access to them
+export { default as productTemplateData } from './productTemplateData';
+export { default as icon10CSData } from './icon10CSData';
+
 // Define a ProductDataType interface to represent the structure of product data
 export interface ProductDataType {
   productInfo: ProductInfo;
@@ -13,14 +21,6 @@ export interface ProductDataType {
   documents: ProductDocument[];
   [key: string]: any; // Allow for additional properties
 }
-
-// Import all the product data files
-import productTemplateData from './productTemplateData';
-import icon10CSData from './icon10CSData';
-
-// Import these individually if you need direct access to them
-export { default as productTemplateData } from './productTemplateData';
-export { default as icon10CSData } from './icon10CSData';
 
 // Create a registry of all product data that can be accessed by product ID
 // Use Record type to ensure TypeScript knows this is an object with string keys and ProductDataType values
