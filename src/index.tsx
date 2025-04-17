@@ -4,6 +4,9 @@ import App from './App';
 import icon10CSData from './data/icon10CSData';
 import './styles/global.css';
 
+// Log dữ liệu để kiểm tra
+console.log('Icon 10CS Data:', icon10CSData);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

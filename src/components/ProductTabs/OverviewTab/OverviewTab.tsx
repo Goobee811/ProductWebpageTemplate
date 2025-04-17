@@ -1,116 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { MainProduct, ProductFeature, HowItWorksStep } from '../../../types/product';
+import { ProductInfo as ProductInfoType, FeatureDetail, Step } from '../../../types/product';
+import icon10CSData from '../../../data/icon10CSData';
 import UniqueFeature from './UniqueFeature';
 import HowItWorks from './HowItWorks';
 import KeyFeatures from './KeyFeatures';
 
 interface OverviewTabProps {
-  productId: string;
+  productData?: ProductInfoType;
+  productId?: string;
 }
 
-// Tab Tổng Quan - Chứa thông tin chung về sản phẩm, tính năng và cách hoạt động
-const OverviewTab: React.FC<OverviewTabProps> = ({ productId }) => {
-  // State để lưu dữ liệu
-  const [product, setProduct] = useState<MainProduct | null>(null);
-  const [features, setFeatures] = useState<ProductFeature[]>([]);
-  const [howItWorksSteps, setHowItWorksSteps] = useState<HowItWorksStep[]>([]);
+const OverviewTab: React.FC<OverviewTabProps> = ({ productData, productId }) => {
+  const [product, setProduct] = useState<ProductInfoType | null>(productData || null);
+  const [features, setFeatures] = useState<FeatureDetail[]>(icon10CSData.features);
+  const [howItWorksSteps, setHowItWorksSteps] = useState<Step[]>([]);
   const [advantages, setAdvantages] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Giả lập việc lấy dữ liệu
   useEffect(() => {
-    // PLACEHOLDER: Dữ liệu mẫu - trong thực tế sẽ là API call
+    if (productData) {
+      setProduct(productData);
+      return;
+    }
+    if (productId && !productData) {
+      setLoading(true);
+      setProduct(icon10CSData.productInfo);
+      setLoading(false);
+    } else if (!product) {
+      setProduct(icon10CSData.productInfo);
+    }
+  }, [productId, productData, product]);
+
+  useEffect(() => {
+    setProduct(productData || icon10CSData.productInfo);
     setTimeout(() => {
-      // Dữ liệu mẫu cho sản phẩm chính
-      setProduct({
-        id: 'product-1',
-        name: '[TÊN SẢN PHẨM]',
-        tagline: '[KHẨU HIỆU SẢN PHẨM - MỘT CÂU NGẮN GỌN VỀ ĐIỂM MẠNH]',
-        description: '[MÔ TẢ CHI TIẾT VỀ SẢN PHẨM - 3-5 DÒNG]',
-        primaryImage: '/images/product-main.jpg',
-        category: '[DANH MỤC]',
-        status: 'Đang kinh doanh',
-        composition: '[THÀNH PHẦN]',
-        chemicalFamily: '[HỌ THUỐC]',
-        activityGroup: '[NHÓM HOẠT ĐỘNG]',
-        formulation: '[DẠNG THUỐC]',
-        modeOfAction: '[CƠ CHẾ TÁC ĐỘNG]'
-      });
-
-      // Dữ liệu mẫu cho các tính năng chính
-      setFeatures([
-        {
-          id: 'feature-1',
-          title: '[TÍNH NĂNG 1]',
-          description: '[MÔ TẢ NGẮN GỌN]',
-          icon: 'icon-feature-1'
-        },
-        {
-          id: 'feature-2',
-          title: '[TÍNH NĂNG 2]',
-          description: '[MÔ TẢ NGẮN GỌN]',
-          icon: 'icon-feature-2'
-        },
-        {
-          id: 'feature-3',
-          title: '[TÍNH NĂNG 3]',
-          description: '[MÔ TẢ NGẮN GỌN]',
-          icon: 'icon-feature-3'
-        },
-        {
-          id: 'feature-4',
-          title: '[TÍNH NĂNG 4]',
-          description: '[MÔ TẢ NGẮN GỌN]',
-          icon: 'icon-feature-4'
-        }
-      ]);
-
-      // Dữ liệu mẫu cho các bước hoạt động
       setHowItWorksSteps([
-        {
-          id: 'step-1',
-          title: '[BƯỚC 1]',
-          description: '[MÔ TẢ CHI TIẾT VỀ BƯỚC NÀY]',
-          image: '/images/how-it-works-1.jpg'
-        },
-        {
-          id: 'step-2',
-          title: '[BƯỚC 2]',
-          description: '[MÔ TẢ CHI TIẾT VỀ BƯỚC NÀY]',
-          image: '/images/how-it-works-2.jpg'
-        },
-        {
-          id: 'step-3',
-          title: '[BƯỚC 3]',
-          description: '[MÔ TẢ CHI TIẾT VỀ BƯỚC NÀY]',
-          image: '/images/how-it-works-3.jpg'
-        }
+        { id: 'step-1', title: "Tiếp xúc ban đầu", description: "Lambda-cyhalothrin tiếp xúc với côn trùng thông qua bề mặt đã được phun xịt, bắt đầu quá trình tác động" },
+        { id: 'step-2', title: "Giải phóng hoạt chất", description: "Vi nang polymer từ từ giải phóng Lambda-cyhalothrin, đảm bảo hiệu quả liên tục kéo dài" },
+        { id: 'step-3', title: "Tác động hệ thần kinh", description: "Hoạt chất tác động lên kênh natri của côn trùng, gây rối loạn dẫn truyền thần kinh" },
+        { id: 'step-4', title: "Hiệu quả tồn lưu", description: "Công nghệ vi nang bảo vệ hoạt chất khỏi ánh sáng và độ ẩm, duy trì hiệu quả đến 3 tháng" }
       ]);
-
-      // Dữ liệu mẫu cho các ưu điểm
       setAdvantages([
-        '[ƯU ĐIỂM 1]',
-        '[ƯU ĐIỂM 2]',
-        '[ƯU ĐIỂM 3]'
+        "Hiệu quả tồn lưu dài lâu đến 3 tháng", 
+        "An toàn khi sử dụng đúng hướng dẫn", 
+        "Công nghệ vi nang bảo vệ hoạt chất khỏi tác động môi trường"
       ]);
     }, 500);
-  }, [productId]);
+  }, [productData]);
+
+  if (loading) {
+    return <div className="loading">Đang tải thông tin sản phẩm...</div>;
+  }
+
+  if (!product) {
+    return <div className="error">Không thể tải thông tin sản phẩm.</div>;
+  }
 
   return (
     <div className="overview-tab">
-      {/* Phần Tính Năng Đặc Biệt */}
-      <UniqueFeature 
-        productName={product?.name || '[TÊN SẢN PHẨM]'}
-        uniqueFeature="[ĐẶC ĐIỂM NỔI BẬT]"
-        environment="[MÔI TRƯỜNG SỬ DỤNG]"
-        description={product?.description || '[MÔ TẢ CHI TIẾT]'}
-        quote="[TRÍCH DẪN TỪ CHUYÊN GIA HOẶC KHÁCH HÀNG]"
-        quoteSource="[NGUỒN TRÍCH DẪN]"
+      <UniqueFeature
+        productName={product?.name || 'Icon 10CS Gói 62.5ml'}
+        uniqueFeature="Công nghệ vi nang (CS) tiên tiến"
+        environment="Trong nhà"
+        description={product?.description || 'Thuốc diệt muỗi và kiến ba khoang công nghệ vi nang, hiệu quả đến 3 tháng'}
+        quote="Lambda-cyhalothrin CS đã được WHO khuyến cáo sử dụng trong các chiến dịch phun tồn lưu trong nhà (IRS) nhằm kiểm soát muỗi truyền bệnh"
+        quoteSource="World Health Organization, 2021"
       />
-      
-      {/* Phần Tính Năng Chính */}
       <KeyFeatures features={features} />
-      
-      {/* Phần Cách Thức Hoạt Động */}
       <HowItWorks steps={howItWorksSteps} advantages={advantages} />
     </div>
   );
